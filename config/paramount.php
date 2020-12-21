@@ -4,6 +4,7 @@ return [
     'paramount_api_key' => env('PARAMOUNT_API_KEY', ''),
     'paramount_location_region' => '',
     'paramount_location_regions' => [],
+    'web_portal_row_id' => '',
     'urls' => [
         'api' => 'https://api.webfdm.com',
         'web-sales' => 'https://websales.webfdm.com',
