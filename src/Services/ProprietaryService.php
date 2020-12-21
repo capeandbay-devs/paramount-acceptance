@@ -32,6 +32,25 @@ class ProprietaryService
         return $results;
     }
 
+    public function getStagingInfo(array $payload)
+    {
+        $results = false;
+
+        $payload['webPortalRowID'] = config('paramount.urls.web_portal_row_id');
+        $url = config('paramount.urls.web-sales') . '/WebSales/GetStagingInfo';
+
+        $response = Curl::to($url)
+            ->withData($payload)
+            ->asJson(true)
+            ->post();
+
+        if ($response) {
+            $results = $response;
+        }
+
+        return $results;
+    }
+
     public function getMemberships(string $club_id)
     {
         $results = false;

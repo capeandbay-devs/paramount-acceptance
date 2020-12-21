@@ -43,6 +43,7 @@ class Paramount
                 break;
 
             case 'getLoadTemplates':
+            case 'getStagingInfo':
                 $results = $this->internal->$resource($args);
                 break;
 
