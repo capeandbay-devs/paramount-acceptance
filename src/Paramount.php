@@ -32,6 +32,7 @@ class Paramount
                 break;
 
             case 'getMemberships':
+            case 'getEmployees':
                 $results = array_key_exists('club_id', $args)
                     ? $this->locations->$resource($args['club_id'])
                     : [];

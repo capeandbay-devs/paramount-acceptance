@@ -50,4 +50,24 @@ class LocationsService
 
         return $results;
     }
+
+    public function getEmployees(string $club_id)
+    {
+        $results = false;
+
+        $url = config('paramount.urls.api') . '/legacy/PAC/API/GetEmployees/' . $this->api_key;
+
+        $payload = ['ClubId' => $club_id];
+
+        $response = Curl::to($url)
+            ->withData($payload)
+            ->asJson(true)
+            ->post();
+
+        if ($response) {
+            $results = $response;
+        }
+
+        return $results;
+    }
 }
