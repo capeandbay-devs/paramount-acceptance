@@ -3,13 +3,14 @@
 namespace CapeAndBay\Paramount;
 
 use CapeAndBay\Paramount\Services\AppointmentService;
+use CapeAndBay\Paramount\Services\CheckoutService;
 use CapeAndBay\Paramount\Services\LocationsService;
 use CapeAndBay\Paramount\Services\ProprietaryService;
 
 class Paramount
 {
     protected $api_key;
-    protected $locations, $appointments, $internal;
+    protected $checkout, $locations, $appointments, $internal;
 
     public function __construct()
     {
@@ -17,6 +18,7 @@ class Paramount
         $this->locations = new LocationsService($this->api_key);
         $this->appointments = new AppointmentService($this->api_key);
         $this->internal = new ProprietaryService($this->api_key);
+        $this->checkout = new CheckoutService($this->api_key);
     }
 
     public function retrieve(string $resource, array $args = [])
@@ -45,6 +47,10 @@ class Paramount
             case 'getLoadTemplates':
             case 'getStagingInfo':
                 $results = $this->internal->$resource($args);
+                break;
+
+            case 'GetSignaturePrompts':
+                $results = $this->checkout->$resource($args);
                 break;
 
             default:

@@ -51,23 +51,4 @@ class ProprietaryService
         return $results;
     }
 
-    public function getMemberships(string $club_id)
-    {
-        $results = false;
-
-        $url = config('paramount.urls.api') . '/Legacy/PAC/API/GetMemberships/' . $this->api_key;
-
-        $payload = ['ClubId' => $club_id];
-
-        $response = Curl::to($url)
-            ->withData($payload)
-            ->asJson(true)
-            ->post();
-
-        if ($response) {
-            $results = $response;
-        }
-
-        return $results;
-    }
 }
