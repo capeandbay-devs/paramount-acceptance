@@ -30,4 +30,22 @@ class CheckoutService
 
         return $results;
     }
+
+    public function InsertContracts(array $payload)
+    {
+        $results = false;
+
+        $url = 'https://dss.webfdm.com/legacy/PAC/API/InsertContracts/'.config('paramount.paramount_api_key');
+
+        $response = Curl::to($url)
+            ->withData($payload)
+            ->asJson(true)
+            ->post();
+
+        if ($response) {
+            $results = $response;
+        }
+
+        return $results;
+    }
 }

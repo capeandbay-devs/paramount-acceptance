@@ -21,6 +21,21 @@ class Paramount
         $this->checkout = new CheckoutService($this->api_key);
     }
 
+    public function submit(string $resource, array $args = [])
+    {
+        switch($resource)
+        {
+            case 'InsertContracts':
+                $results = $this->checkout->$resource($args);
+                break;
+
+            default:
+                $results = false;
+        }
+
+        return $results;
+    }
+
     public function retrieve(string $resource, array $args = [])
     {
         switch($resource)
