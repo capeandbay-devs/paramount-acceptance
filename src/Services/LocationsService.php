@@ -70,4 +70,28 @@ class LocationsService
 
         return $results;
     }
+
+    public function getMemberContracts(string $club_id, string $member_number, float $api_version = 1.0)
+    {
+        $results = false;
+
+//        $url = config('paramount.urls.api') . '/legacy/PAC/API/GetEmployees/' . $this->api_key;
+        $url = "https://pacapi.webfdm.com/API/Members/{$club_id}/{$member_number}/Contracts";
+
+        $response = Curl::to($url)
+            ->withContentType('application/json')
+            ->withHeader('ClubAt: ' . $club_id)
+            ->withHeader('api-version: '.$api_version)
+            ->withHeader('Authorization: Bearer ' . env('PARAMOUNT_API_KEY'))
+            ->asJson(true)
+            ->get();
+
+        if ($response) {
+            $results = $response;
+        }else{
+            $results = 'got here';
+        }
+
+        return $results;
+    }
 }
