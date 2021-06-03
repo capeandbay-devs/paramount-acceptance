@@ -7,6 +7,8 @@ return [
     'web_portal_row_id' => '',
     'urls' => [
         'api' => 'https://api.webfdm.com',
+        'pacapi' => 'https://pacapi.webfdm.com',
+        'secure-api' => 'https://secureapi.webfdm.com',
         'web-sales' => 'https://websales.webfdm.com',
         'training' => [
             'get' => [
