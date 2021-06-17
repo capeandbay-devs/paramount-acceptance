@@ -6,7 +6,7 @@ use CapeAndBay\Paramount\Services\AppointmentService;
 use CapeAndBay\Paramount\Services\CheckoutService;
 use CapeAndBay\Paramount\Services\LocationsService;
 use CapeAndBay\Paramount\Services\ProprietaryService;
-use CapeAndBay\Paramount\Services\ContractsService;
+use CapeAndBay\Paramount\Services\MemberService;
 
 class Paramount
 {
@@ -20,7 +20,7 @@ class Paramount
         $this->appointments = new AppointmentService($this->api_key);
         $this->internal = new ProprietaryService($this->api_key);
         $this->checkout = new CheckoutService($this->api_key);
-        $this->contracts = new ContractsService($this->api_key);
+        $this->contracts = new MemberService($this->api_key);
     }
 
     public function submit(string $resource, array $args = [])
@@ -73,6 +73,7 @@ class Paramount
             case 'GetSignaturePrompts':
                 $results = $this->checkout->$resource($args);
                 break;
+            case 'getServices':
             case 'getContracts':
                 $results = array_key_exists('club_id', $args) && array_key_exists('member_number', $args)
                     ? $this->contracts->$resource($args['club_id'], $args['member_number'])
