@@ -73,6 +73,11 @@ class Paramount
             case 'GetSignaturePrompts':
                 $results = $this->checkout->$resource($args);
                 break;
+            case 'getContractsByType':
+                $results = array_key_exists('club_id', $args) && array_key_exists('contract_type', $args)
+                    ? $this->locations->$resource($args['club_id'], $args['contract_type'])
+                    : [];
+                break;
             case 'getServices':
             case 'getContracts':
                 $results = array_key_exists('club_id', $args) && array_key_exists('member_number', $args)

@@ -70,4 +70,33 @@ class LocationsService
 
         return $results;
     }
+    /**
+     * Gets contracts matching a certain type for a given club.
+     * @param string $club_id
+     * @param string $contract_type
+     * @param float $api_version
+     * @return mixed response object or false
+     */
+    public function GetContractsByType(string $club_id, string $contract_type, float $api_version = 1.0)
+    {
+        $results = false;
+
+        $base_url = config('paramount.urls.pacapi');
+        $url = "{$base_url}/API/Contracts/{$contract_type}";
+        $api_key = env('PARAMOUNT_API_KEY');
+
+        $response = Curl::to($url)
+            ->withContentType('application/json')
+            ->withHeader("ClubAt: {$club_id}")
+            ->withHeader("api-version: {$api_version}")
+            ->withHeader("Authorization: Bearer {$api_key}")
+            ->asJson(true)
+            ->get();
+
+        if ($response) {
+            $results = $response;
+        }
+
+        return $results;
+    }
 }
