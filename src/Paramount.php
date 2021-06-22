@@ -11,7 +11,7 @@ use CapeAndBay\Paramount\Services\MemberService;
 class Paramount
 {
     protected $api_key;
-    protected $checkout, $locations, $appointments, $internal;
+    protected $checkout, $locations, $appointments, $internal, $members;
 
     public function __construct()
     {
@@ -20,7 +20,7 @@ class Paramount
         $this->appointments = new AppointmentService($this->api_key);
         $this->internal = new ProprietaryService($this->api_key);
         $this->checkout = new CheckoutService($this->api_key);
-        $this->contracts = new MemberService($this->api_key);
+        $this->members = new MemberService($this->api_key);
     }
 
     public function submit(string $resource, array $args = [])
@@ -31,7 +31,7 @@ class Paramount
                 $results = $this->checkout->$resource($args);
                 break;
             case 'AddContracts':
-                $results = $this->contracts->$resource($args['club_id'], $args['member_number'], $args['payload']);
+                $results = $this->members->$resource($args['club_id'], $args['member_number'], $args['payload']);
                 break;
 
             default:
@@ -81,7 +81,7 @@ class Paramount
             case 'getServices':
             case 'getContracts':
                 $results = array_key_exists('club_id', $args) && array_key_exists('member_number', $args)
-                    ? $this->contracts->$resource($args['club_id'], $args['member_number'])
+                    ? $this->members->$resource($args['club_id'], $args['member_number'])
                     : [];
                 break;
 
