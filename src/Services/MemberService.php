@@ -109,4 +109,94 @@ class MemberService
 
         return $results;
     }
+
+    /**
+     * Gets a member's billing details
+     * @param string $club_id
+     * @param string $member_number
+     * @param float $api_version
+     * @return mixed response object or false
+     */
+    public function GetBillingDetails(string $club_id, string $member_number, float $api_version = 1.0)
+    {
+        $results = false;
+
+        $base_url = config('paramount.urls.pacapi');
+        $url = "{$base_url}/API/Members/{$club_id}/{$member_number}/BillingDetails";
+        $api_key = env('PARAMOUNT_API_KEY');
+
+        $response = Curl::to($url)
+            ->withContentType('application/json')
+            ->withHeader("ClubAt: {$club_id}")
+            ->withHeader("api-version: {$api_version}")
+            ->withHeader("Authorization: Bearer {$api_key}")
+            ->asJson(true)
+            ->get();
+
+        if ($response) {
+            $results = $response;
+        }
+
+        return $results;
+    }
+
+    /**
+     * Gets a member's mailing address
+     * @param string $club_id
+     * @param string $member_number
+     * @param float $api_version
+     * @return mixed response object or false
+     */
+    public function GetAddress(string $club_id, string $member_number, float $api_version = 1.0)
+    {
+        $results = false;
+
+        $base_url = config('paramount.urls.pacapi');
+        $url = "{$base_url}/API/Members/{$club_id}/{$member_number}/Address";
+        $api_key = env('PARAMOUNT_API_KEY');
+
+        $response = Curl::to($url)
+            ->withContentType('application/json')
+            ->withHeader("ClubAt: {$club_id}")
+            ->withHeader("api-version: {$api_version}")
+            ->withHeader("Authorization: Bearer {$api_key}")
+            ->asJson(true)
+            ->get();
+
+        if ($response) {
+            $results = $response;
+        }
+
+        return $results;
+    }
+
+    /**
+     * Gets a member's phone numbers
+     * @param string $club_id
+     * @param string $member_number
+     * @param float $api_version
+     * @return mixed response object or false
+     */
+    public function GetPhone(string $club_id, string $member_number, float $api_version = 1.0)
+    {
+        $results = false;
+
+        $base_url = config('paramount.urls.pacapi');
+        $url = "{$base_url}/API/Members/{$club_id}/{$member_number}/Phone";
+        $api_key = env('PARAMOUNT_API_KEY');
+
+        $response = Curl::to($url)
+            ->withContentType('application/json')
+            ->withHeader("ClubAt: {$club_id}")
+            ->withHeader("api-version: {$api_version}")
+            ->withHeader("Authorization: Bearer {$api_key}")
+            ->asJson(true)
+            ->get();
+
+        if ($response) {
+            $results = $response;
+        }
+
+        return $results;
+    }
 }
