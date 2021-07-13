@@ -23,7 +23,7 @@ class MemberService
      * @param float $api_version
      * @return mixed response object or false
      */
-    public function GetContracts(string $club_id, string $member_number, float $api_version = 1.0)
+    public function getContracts(string $club_id, string $member_number, float $api_version = 1.0)
     {
         $results = false;
 
@@ -56,7 +56,7 @@ class MemberService
      * @param float $api_version
      * @return false
      */
-    public function AddContracts(string $club_id, string $member_number, array $payload, float $api_version = 1.0)
+    public function addContracts(string $club_id, string $member_number, array $payload, float $api_version = 1.0)
     {
         $results = false;
 
@@ -87,7 +87,7 @@ class MemberService
      * @param float $api_version
      * @return mixed response object or false
      */
-    public function GetServices(string $club_id, string $member_number, float $api_version = 1.0)
+    public function getServices(string $club_id, string $member_number, float $api_version = 1.0)
     {
         $results = false;
 
@@ -117,7 +117,7 @@ class MemberService
      * @param float $api_version
      * @return mixed response object or false
      */
-    public function GetBillingDetails(string $club_id, string $member_number, float $api_version = 1.0)
+    public function getBillingDetails(string $club_id, string $member_number, float $api_version = 1.0)
     {
         $results = false;
 
@@ -147,7 +147,7 @@ class MemberService
      * @param float $api_version
      * @return mixed response object or false
      */
-    public function GetAddress(string $club_id, string $member_number, float $api_version = 1.0)
+    public function getAddress(string $club_id, string $member_number, float $api_version = 1.0)
     {
         $results = false;
 
@@ -177,7 +177,7 @@ class MemberService
      * @param float $api_version
      * @return mixed response object or false
      */
-    public function GetPhone(string $club_id, string $member_number, float $api_version = 1.0)
+    public function getPhone(string $club_id, string $member_number, float $api_version = 1.0)
     {
         $results = false;
 
@@ -206,7 +206,7 @@ class MemberService
      * @param float $api_version
      * @return mixed response object or false
      */
-    public function GetStatus(string $club_id, string $member_number, float $api_version = 1.0)
+    public function getStatus(string $club_id, string $member_number, float $api_version = 1.0)
     {
         $results = false;
 

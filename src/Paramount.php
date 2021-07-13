@@ -30,7 +30,7 @@ class Paramount
             case 'InsertContracts':
                 $results = $this->checkout->$resource($args);
                 break;
-            case 'AddContracts':
+            case 'addContracts':
                 $results = $this->members->$resource($args['club_id'], $args['member_number'], $args['payload']);
                 break;
 
