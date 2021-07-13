@@ -30,7 +30,7 @@ class Paramount
             case 'InsertContracts':
                 $results = $this->checkout->$resource($args);
                 break;
-            case 'AddContracts':
+            case 'addContracts':
                 $results = $this->members->$resource($args['club_id'], $args['member_number'], $args['payload']);
                 break;
 
@@ -83,6 +83,7 @@ class Paramount
             case 'getAddress':
             case 'getPhone':
             case 'getContracts':
+            case 'getStatus':
                 $results = array_key_exists('club_id', $args) && array_key_exists('member_number', $args)
                     ? $this->members->$resource($args['club_id'], $args['member_number'])
                     : [];
