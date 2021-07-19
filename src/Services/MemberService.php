@@ -23,7 +23,7 @@ class MemberService
      * @param float $api_version
      * @return mixed response object or false
      */
-    public function GetContracts(string $club_id, string $member_number, float $api_version = 1.0)
+    public function getContracts(string $club_id, string $member_number, float $api_version = 1.0)
     {
         $results = false;
 
@@ -56,7 +56,7 @@ class MemberService
      * @param float $api_version
      * @return false
      */
-    public function AddContracts(string $club_id, string $member_number, array $payload, float $api_version = 1.0)
+    public function addContracts(string $club_id, string $member_number, array $payload, float $api_version = 1.0)
     {
         $results = false;
 
@@ -87,7 +87,7 @@ class MemberService
      * @param float $api_version
      * @return mixed response object or false
      */
-    public function GetServices(string $club_id, string $member_number, float $api_version = 1.0)
+    public function getServices(string $club_id, string $member_number, float $api_version = 1.0)
     {
         $results = false;
 
@@ -117,7 +117,7 @@ class MemberService
      * @param float $api_version
      * @return mixed response object or false
      */
-    public function GetBillingDetails(string $club_id, string $member_number, float $api_version = 1.0)
+    public function getBillingDetails(string $club_id, string $member_number, float $api_version = 1.0)
     {
         $results = false;
 
@@ -147,7 +147,7 @@ class MemberService
      * @param float $api_version
      * @return mixed response object or false
      */
-    public function GetAddress(string $club_id, string $member_number, float $api_version = 1.0)
+    public function getAddress(string $club_id, string $member_number, float $api_version = 1.0)
     {
         $results = false;
 
@@ -177,12 +177,41 @@ class MemberService
      * @param float $api_version
      * @return mixed response object or false
      */
-    public function GetPhone(string $club_id, string $member_number, float $api_version = 1.0)
+    public function getPhone(string $club_id, string $member_number, float $api_version = 1.0)
     {
         $results = false;
 
         $base_url = config('paramount.urls.pacapi');
         $url = "{$base_url}/API/Members/{$club_id}/{$member_number}/Phone";
+        $api_key = env('PARAMOUNT_API_KEY');
+
+        $response = Curl::to($url)
+            ->withContentType('application/json')
+            ->withHeader("ClubAt: {$club_id}")
+            ->withHeader("api-version: {$api_version}")
+            ->withHeader("Authorization: Bearer {$api_key}")
+            ->asJson(true)
+            ->get();
+
+        if ($response) {
+            $results = $response;
+        }
+
+        return $results;
+    }
+    /**
+     * Gets a member's status information
+     * @param string $club_id
+     * @param string $member_number
+     * @param float $api_version
+     * @return mixed response object or false
+     */
+    public function getStatus(string $club_id, string $member_number, float $api_version = 1.0)
+    {
+        $results = false;
+
+        $base_url = config('paramount.urls.pacapi');
+        $url = "{$base_url}/API/Members/{$club_id}/{$member_number}/Status";
         $api_key = env('PARAMOUNT_API_KEY');
 
         $response = Curl::to($url)
